@@ -48,10 +48,13 @@ jobs:
       -
         name: Updating Docker image tag
         run: |
-          git config --global user.email ci-bot@argocd.com && git config --global user.name ci-bot
           sed -i "s,tag:.*,tag:\ ${{ github.event.pull_request.head.sha }}," helm/webapp/values.yaml
-          git add . && git commit -m "update image tag [skip ci]"
-          git push
+      - 
+        name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GT_TOKEN }}
+          commit_message: Updating Docker image tag
   add_labels:
     runs-on: ubuntu-latest
     needs: update-image-tag-in-helm
