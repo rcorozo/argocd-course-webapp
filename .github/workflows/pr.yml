@@ -53,7 +53,7 @@ jobs:
         name: Commit and push changes
         uses: devops-infra/action-commit-push@master
         with:
-          github_token: ${{ secrets.GT_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: Updating Docker image tag
   add_labels:
     runs-on: ubuntu-latest
