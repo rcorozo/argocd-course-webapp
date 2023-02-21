@@ -48,6 +48,7 @@ jobs:
       -
         name: Updating Docker image tag
         run: |
+          git config --global user.email ci-bot@argocd.com && git config --global user.name ci-bot
           sed -i "s,tag:.*,tag:\ ${{ github.event.pull_request.head.sha }}," helm/webapp/values.yaml
           git add . && git commit -m "update image tag [skip ci]"
           git push
